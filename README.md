@@ -46,7 +46,7 @@ O resultado fica em `dist/`. A aplicação não depende de backend, credenciais 
 - Recife e fotografia: preservados do portfólio original deste repositório.
 - GAMERBOXX: nome atualizado por Ayrton, com quatro capturas reais da aplicação fornecidas por ele. Contribuição descrita com base na confirmação de autoria do front-end e na inspeção anterior do checkout `C:\projetos\Newton\newton-front`. O backend Newton é um projeto separado. Nenhum arquivo desse checkout foi alterado. O link do repositório não foi publicado porque o acesso público não pôde ser confirmado.
 - OOP Market Simulator: informações conferidas no [README público](https://github.com/ayrtonlira-dev/oop-market-simulator).
-- Meu portfólio: [repositório original](https://github.com/ayrtonlira-dev/meu-perfil), evoluído localmente para React. As alterações precisam ser enviadas ao GitHub para que o código remoto reflita esta versão.
+- Meu portfólio: [repositório](https://github.com/ayrtonlira-dev/meu-perfil), evoluído da versão inicial em HTML e CSS para React.
 - Python permanece apenas no histórico de projetos, como estudo anterior. A apresentação e a seção de tecnologias priorizam React, JavaScript, HTML, CSS e Git.
 
 O cartão e a galeria do GAMERBOXX usam capturas reais. As artes dos outros cartões são composições ilustrativas em HTML/CSS. Fontes Google Fonts possuem fallback local caso a conexão não esteja disponível. A preferência de tema usa localStorage; o site funciona se esse armazenamento estiver bloqueado.
@@ -54,3 +54,9 @@ O cartão e a galeria do GAMERBOXX usam capturas reais. As artes dos outros cart
 ## Publicação
 
 Este trabalho foi feito no projeto local existente. Nenhum commit, push ou deploy é executado automaticamente pelos scripts. Para hospedar, publique o conteúdo de `dist/` no provedor escolhido.
+
+## Registro da versão inicial
+
+Breve introdução de quem eu sou
+
+<img width="1677" height="953" alt="image" src="https://github.com/user-attachments/assets/c3237535-81de-442f-a3ca-1d9d93f1f688" />
