@@ -7,8 +7,9 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open index.html",
-            "file": "c:\\projetos\\site-teste\\index.html"
+            "name": "Abrir portfólio React (inicie npm run dev)",
+            "url": "http://127.0.0.1:5173",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }
