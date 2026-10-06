@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-O resultado fica em `dist/`. A aplicação não depende de backend, credenciais ou variáveis de ambiente. `base: './'` permite servir a versão compilada também em subdiretórios.
+O resultado fica em `dist/`. A aplicação não depende de backend, credenciais ou variáveis de ambiente. O build usa `/meu-perfil/` como caminho base para o GitHub Pages; o desenvolvimento local continua em `/`. Para testar o build, abra `/meu-perfil/` na URL exibida por `npm run preview`.
 
 ## Personalizar
 
@@ -53,7 +53,13 @@ O cartão e a galeria do GAMERBOXX usam capturas reais. As artes dos outros cart
 
 ## Publicação
 
-Este trabalho foi feito no projeto local existente. Nenhum commit, push ou deploy é executado automaticamente pelos scripts. Para hospedar, publique o conteúdo de `dist/` no provedor escolhido.
+O workflow `.github/workflows/deploy.yml` compila e publica o portfólio no GitHub Pages a cada push na branch `main`. Ele também pode ser executado manualmente pela aba Actions.
+
+Em Settings → Pages, a opção Source deve estar configurada como GitHub Actions.
+
+Endereço do site: https://ayrtonlira-dev.github.io/meu-perfil/
+
+O GitHub Actions instala as dependências com `npm ci`, executa `npm run build` e publica somente a pasta `dist/`. Acompanhe o resultado na aba Actions do repositório.
 
 ## Registro da versão inicial
 
