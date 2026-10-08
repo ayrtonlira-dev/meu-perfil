@@ -299,6 +299,17 @@ h1 em { font-size: 1.12em; }
 @keyframes star-turn { to { transform: rotate(360deg); } }
 @keyframes card-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+
+/* Freelance project cover and live website link. */
+.art-studiocar { background: radial-gradient(ellipse at 95% 0%, #65ff8f24, transparent 65%), #102119; }
+.project-site-link { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; padding-block: 8px; color: var(--accent); font-size: 12px; }
+.project-site-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (min-width: 801px) {
+  .projects-grid-four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projects-grid-four .project-art { height: 310px; }
+  .projects-grid-four .screenshot-window { width: 100%; max-width: 400px; justify-self: center; }
+}
+
 @media (min-width: 1500px) { .hero { min-height: 820px; gap: 70px; } }
 @media (max-width: 1100px) {
   .container { width: calc(100% - 72px); }

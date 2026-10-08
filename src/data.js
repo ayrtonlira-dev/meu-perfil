@@ -1,3 +1,5 @@
+import studioCarHome from '../assets/studiocar/inicio.png';
+import studioCarServices from '../assets/studiocar/servicos.png';
 import gamerboxxHome from '../assets/gamerboxx/inicio.png';
 import gamerboxxLogin from '../assets/gamerboxx/login.png';
 import gamerboxxGames from '../assets/gamerboxx/jogos-avaliados.png';
@@ -11,8 +13,33 @@ export const profile = {
 
 export const projects = [
   {
-    id: 'gamerboxx',
+    id: 'studiocar',
     number: '01',
+    name: 'Studio Car Recife',
+    subtitle: 'Presença digital para um negócio de Recife.',
+    category: 'Front-end',
+    type: 'Freelance · Website publicado',
+    description: 'Site institucional criado como freelance para uma oficina de pintura e funilaria em Recife, com apresentação dos serviços, avaliações de clientes e contato pelo WhatsApp.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    repository: null,
+    website: 'https://studiocarrecife.com.br/',
+    images: [
+      { src: studioCarHome, label: 'Página inicial', alt: 'Página inicial do Studio Car Recife, com apresentação da oficina e botão de orçamento pelo WhatsApp.', width: 1440, height: 800 },
+      { src: studioCarServices, label: 'Serviços', alt: 'Seção de serviços do Studio Car Recife, com pintura automotiva, funilaria e martelinho de ouro.', width: 1440, height: 800 },
+    ],
+    role: 'Desenvolvimento do site institucional do Studio Car Recife em um trabalho freelance, usando HTML, CSS e JavaScript.',
+    details: [
+      'Layout responsivo com apresentação da oficina e dos serviços automotivos.',
+      'Contato e solicitação de orçamento por links diretos para o WhatsApp.',
+      'Galeria de avaliações de clientes com ampliação e transcrição em texto.',
+      'Mapa de localização, horários de atendimento e acesso à rota no Google Maps.',
+      'Estrutura semântica, navegação por teclado e metadados para mecanismos de busca.',
+    ],
+    learning: 'Uma experiência profissional que conecta meus estudos em desenvolvimento web à entrega de um projeto para um cliente.',
+  },
+  {
+    id: 'gamerboxx',
+    number: '02',
     name: 'GAMERBOXX',
     subtitle: 'Uma comunidade para quem joga.',
     category: 'Front-end',
@@ -37,7 +64,7 @@ export const projects = [
   },
   {
     id: 'market',
-    number: '03',
+    number: '04',
     name: 'OOP Market Simulator',
     subtitle: 'Da lógica ao carrinho de compras.',
     category: 'Estudos',
@@ -56,7 +83,7 @@ export const projects = [
   },
   {
     id: 'portfolio',
-    number: '02',
+    number: '03',
     name: 'Meu portfólio',
     subtitle: 'Um espaço para a minha evolução.',
     category: 'Front-end',

@@ -36,8 +36,8 @@ function ProjectArt({ project }) {
   return <div className={`project-art art-${kind}`} aria-hidden="true">
     <div className="art-grid" />
     {project.images && <div className="screenshot-window">
-      <div className="window-bar"><span><i /><i /><i /></span><small>GAMERBOXX</small><span className="screenshot-count">4 telas</span></div>
-      <img src={project.images[0].src} alt="" loading="lazy" width="1898" height="914" />
+      <div className="window-bar"><span><i /><i /><i /></span><small>{project.name}</small><span className="screenshot-count">{project.images.length} telas</span></div>
+      <img src={project.images[0].src} alt="" loading="lazy" width={project.images[0].width || 1898} height={project.images[0].height || 914} />
     </div>}
     {kind === 'market' && <div className="market-window">
       <div className="window-bar"><span><i /><i /><i /></span><small>market.py</small><Icon name="code" size={14} /></div>
@@ -107,7 +107,9 @@ function ProjectDialog({ project, onClose }) {
       <h3>O que foi construído</h3>
       <ul>{project.details.map(detail => <li key={detail}><Icon name="check" size={17} /><span>{detail}</span></li>)}</ul>
       <div className="learning-note"><Icon name="cap" /><div><h3>O que levo desse projeto</h3><p>{project.learning}</p></div></div>
-      {project.repository
+      {project.website
+        ? <ExternalLink href={project.website} className="button button-primary">Visitar site <Icon name="diagonal" size={17} /></ExternalLink>
+        : project.repository
         ? <ExternalLink href={project.repository} className="button button-primary"><Icon name="github" size={18} /> Explorar repositório <Icon name="diagonal" size={17} /></ExternalLink>
         : <ExternalLink href={profile.linkedin} className="button button-primary"><Icon name="linkedin" size={18} /> Conversar sobre este projeto <Icon name="diagonal" size={17} /></ExternalLink>}
     </div>
@@ -213,7 +215,7 @@ export default function App() {
       <section id="sobre" className="section container about-section">
         <div className="section-heading reveal"><span className="eyebrow"><span>01 /</span> SOBRE MIM</span><h2>Mais do que código.<br /><span>Vontade de construir.</span></h2></div>
         <div className="about-layout reveal">
-          <div className="about-story"><p>Sou Ayrton, de Recife. Gosto de entender como as coisas funcionam — e de transformar esse aprendizado em algo que outras pessoas possam usar.</p><p>Curso <strong>Análise e Desenvolvimento de Sistemas na UNINASSAU</strong> e concentro meus estudos em <strong>desenvolvimento front-end</strong>. Entre interfaces em React, layouts responsivos e integração com APIs, vou conectando teoria e prática.</p><p>Meu foco é construir <strong>interfaces intuitivas e bem estruturadas</strong>, com atenção à experiência de quem usa. Quero contribuir com projetos reais, trocar conhecimento e continuar evoluindo.</p><a className="text-link" href="#contato">Vamos construir algo juntos <Icon name="arrow" size={18} /></a></div>
+          <div className="about-story"><p>Sou Ayrton, de Recife. Gosto de entender como as coisas funcionam — e de transformar esse aprendizado em algo que outras pessoas possam usar.</p><p>Curso <strong>Análise e Desenvolvimento de Sistemas na UNINASSAU</strong> e concentro meus estudos em <strong>desenvolvimento front-end</strong>. Entre interfaces em React, layouts responsivos e integração com APIs, vou conectando teoria e prática.</p><p>Meu foco é construir <strong>interfaces intuitivas e bem estruturadas</strong>, com atenção à experiência de quem usa. Já aplico esse cuidado em trabalhos freelance, como o site do <strong>Studio Car Recife</strong>, enquanto sigo trocando conhecimento e evoluindo.</p><a className="text-link" href="#contato">Vamos construir algo juntos <Icon name="arrow" size={18} /></a></div>
           <div className="about-facts"><div className="fact-row"><div className="fact-icon"><Icon name="cap" size={23} /></div><div><small>FORMAÇÃO EM ANDAMENTO</small><h3>Análise e Desenvolvimento<br />de Sistemas</h3><p>UNINASSAU</p></div><span className="fact-index">01</span></div><div className="fact-row"><div className="fact-icon"><Icon name="code" size={23} /></div><div><small>ONDE COLOCO A MÃO NA MASSA</small><h3>Front-end & desenvolvimento web</h3><p>React, interfaces responsivas e integração com APIs</p></div><span className="fact-index">02</span></div><div className="learning-line"><span className="status-dot" /><p>Aprendendo na prática, um projeto de cada vez.</p></div></div>
         </div>
       </section>
@@ -223,10 +225,10 @@ export default function App() {
           <div className="section-heading heading-with-aside reveal"><div><span className="eyebrow"><span>02 /</span> PROJETOS SELECIONADOS</span><h2>Aprendizado que<br />ganhou <em>forma.</em></h2></div><p>Cada projeto, um novo desafio.<br />Cada desafio, um passo à frente.</p></div>
           <div className="projects-toolbar"><div className="project-filters" role="group" aria-label="Filtrar projetos por área">{['Todos', 'Front-end', 'Estudos'].map(item => <button key={item} aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}<span>{item === 'Todos' ? projects.length : projects.filter(project => project.category === item).length.toString().padStart(2, '0')}</span></button>)}</div><ExternalLink href={profile.github} className="text-link">Ver GitHub <Icon name="diagonal" size={16} /></ExternalLink></div>
           <p className="sr-only" role="status">{visibleProjects.length} projetos exibidos</p>
-          <div className="projects-grid">
+          <div className={`projects-grid${visibleProjects.length === 4 ? ' projects-grid-four' : ''}`}>
             {visibleProjects.map(project => <article className="project-card" key={project.id}>
               <button className="project-art-button" onClick={event => openProject(project, event)} aria-label={`Conhecer o projeto ${project.name}`}><ProjectArt project={project} /><span className="project-open"><Icon name="diagonal" size={20} /></span></button>
-              <div className="project-info"><div className="project-type"><span>{project.type}</span><span>{project.number}</span></div><h3>{project.name}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><button className="project-detail-link" onClick={event => openProject(project, event)}>Conheça o projeto <Icon name="arrow" size={17} /><span className="sr-only"> {project.name}</span></button></div>
+              <div className="project-info"><div className="project-type"><span>{project.type}</span><span>{project.number}</span></div><h3>{project.name}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><button className="project-detail-link" onClick={event => openProject(project, event)}>Conheça o projeto <Icon name="arrow" size={17} /><span className="sr-only"> {project.name}</span></button>{project.website && <ExternalLink href={project.website} className="project-site-link">Visitar site <Icon name="diagonal" size={17} /><span className="sr-only"> {project.name}</span></ExternalLink>}</div>
             </article>)}
           </div>
         </div>
