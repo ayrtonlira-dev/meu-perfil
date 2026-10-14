@@ -9,6 +9,8 @@ export const profile = {
   name: 'Ayrton Lira',
   github: 'https://github.com/ayrtonlira-dev',
   linkedin: 'https://www.linkedin.com/in/ayrton-lira-658b873b9/',
+  email: 'ayrtonslira@gmail.com',
+  resume: `${import.meta.env.BASE_URL}curriculo-ayrton-lira.pdf`,
 };
 
 export const projects = [
