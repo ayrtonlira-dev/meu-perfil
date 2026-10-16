@@ -186,10 +186,10 @@ export default function App() {
     <main id="conteudo">
       <section id="inicio" className="hero container">
         <div className="hero-copy">
-          <p className="availability">EM BUSCA DE ESTÁGIO EM FRONT-END</p>
+          <p className="availability">EM BUSCA DE ESTÁGIO FULLSTACK</p>
           <p className="hero-intro">Olá, eu sou Ayrton Lira</p>
           <h1>Conheça um pouco mais sobre mim</h1>
-          <p className="hero-description">Estudo ADS na <strong>UNINASSAU</strong>. No GAMERBOXX, desenvolvo o front-end e integro a API. No Studio Car Recife, identifiquei a falta de um site e conduzi a entrega até a publicação.</p>
+          <p className="hero-description">Estudo ADS na <strong>UNINASSAU</strong>. No GAMERBOXX, desenvolvo interfaces, integro a API e contribuí com um endpoint para consulta de jogos. No Studio Car Recife, identifiquei a falta de um site e conduzi a entrega até a publicação.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#projetos">Ver projetos e contribuições <Icon name="down" size={18} /></a>
             <a href={profile.resume} download className="button button-secondary">Baixar currículo <Icon name="down" size={16} /></a>
@@ -235,14 +235,14 @@ export default function App() {
         <div className="section-heading"><span className="eyebrow"><span>02 /</span> SOBRE MIM</span><h2>De Recife,<br /><span>estudando e desenvolvendo.</span></h2></div>
         <div className="about-layout">
           <div className="about-story">
-            <p>Curso <strong>Análise e Desenvolvimento de Sistemas na UNINASSAU</strong> e busco meu primeiro estágio em front-end.</p>
-            <p>No <strong>GAMERBOXX</strong>, trabalho nas páginas e na integração com a API, com orientação de um amigo engenheiro de software sênior. Nosso objetivo é transformar o projeto em um produto.</p>
+            <p>Curso <strong>Análise e Desenvolvimento de Sistemas na UNINASSAU</strong> e busco meu primeiro estágio em desenvolvimento fullstack.</p>
+            <p>No <strong>GAMERBOXX</strong>, trabalho nas interfaces, na integração com a API e contribuí com um endpoint no backend, com orientação de um amigo engenheiro de software sênior. Nosso objetivo é transformar o projeto em um produto.</p>
             <p>No <strong>Studio Car Recife</strong>, Identifiquei a necessidade, defini o conteúdo com o cliente e conduzi a entrega do site, incluindo domínio, Cloudflare e publicação.</p>
             <a className="text-link" href="#contato">Entrar em contato <Icon name="arrow" size={18} /></a>
           </div>
           <div className="about-facts">
             <div className="fact-row"><div><small>FORMAÇÃO EM ANDAMENTO</small><h3>Análise e Desenvolvimento<br />de Sistemas</h3><p>UNINASSAU</p></div></div>
-            <div className="fact-row"><div><small>FOCO ATUAL</small><h3>Desenvolvimento de interfaces</h3><p>React, lógica da interface e integração com APIs</p></div></div>
+            <div className="fact-row"><div><small>FOCO ATUAL</small><h3>Desenvolvimento fullstack</h3><p>Interfaces, integração com APIs e desenvolvimento de endpoints</p></div></div>
           </div>
         </div>
       </section>
@@ -257,7 +257,7 @@ export default function App() {
       </section>
 
       <section id="contato" className="contact-section section">
-        <div className="container contact-inner"><span className="eyebrow"><span>04 /</span> CONTATO</span><h2>Vamos conversar<br />sobre uma oportunidade?</h2><p>Busco <strong>estágio em desenvolvimento front-end</strong>.<br />Posso apresentar as páginas, a lógica e as integrações do GAMERBOXX.</p><div className="contact-actions"><ExternalLink className="button button-primary" href={profile.linkedin}><Icon name="linkedin" size={19} /> LinkedIn <Icon name="diagonal" size={18} /></ExternalLink><a className="button button-secondary" href={`mailto:${profile.email}`}>{profile.email}</a><a className="button button-secondary" href={profile.resume} download>Baixar currículo <Icon name="down" size={16} /></a></div><div className="contact-note"><Icon name="pin" size={15} /> Recife, PE · Brasil</div></div>
+        <div className="container contact-inner"><span className="eyebrow"><span>04 /</span> CONTATO</span><h2>Vamos conversar<br />sobre uma oportunidade?</h2><p>Busco <strong>estágio em desenvolvimento fullstack</strong>.<br />Posso apresentar as interfaces, as integrações e o endpoint que implementei no GAMERBOXX.</p><div className="contact-actions"><ExternalLink className="button button-primary" href={profile.linkedin}><Icon name="linkedin" size={19} /> LinkedIn <Icon name="diagonal" size={18} /></ExternalLink><a className="button button-secondary" href={`mailto:${profile.email}`}>{profile.email}</a><a className="button button-secondary" href={profile.resume} download>Baixar currículo <Icon name="down" size={16} /></a></div><div className="contact-note"><Icon name="pin" size={15} /> Recife, PE · Brasil</div></div>
       </section>
     </main>
     <footer className="container site-footer"><a className="brand" href="#inicio" aria-label="Voltar ao início">al<span>.</span></a><p>© {new Date().getFullYear()} Ayrton Lira <span>·</span> React + Vite ·</p><a href="#inicio" className="back-top">De volta ao topo <Icon name="arrow" size={16} /></a></footer>

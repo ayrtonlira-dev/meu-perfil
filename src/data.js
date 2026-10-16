@@ -20,13 +20,13 @@ export const projects = [
     featured: true,
     name: 'GAMERBOXX',
     subtitle: 'Construindo um produto para quem joga.',
-    category: 'Front-end',
+    category: 'Desenvolvimento web',
     type: 'Produto em desenvolvimento',
     status: 'Em desenvolvimento',
-    description: 'Uma plataforma de jogos que construo com um amigo. Trabalho no front-end em React e na integração com a API: contas, perfis, busca e organização dos jogos.',
+    description: 'Uma plataforma de jogos que construo com um amigo. Desenvolvo interfaces em React e integro a API para contas, perfis, busca e organização dos jogos. Também implementei um endpoint de consulta de jogos por IDs.',
     tags: ['React', 'JavaScript', 'Axios', 'CSS'],
     repository: null,
-    contribution: 'Front-end, integração com endpoints e uma contribuição no backend para a consulta de jogos por IDs.',
+    contribution: 'Interfaces em React, integração com a API e implementação de um endpoint no backend para consultar jogos por IDs.',
     context: 'Estamos desenvolvendo um produto real, ainda sem publicação em produção. O catálogo utiliza dados da RAWG por meio do backend Newton.',
     images: [
       { src: gamerboxxDetails, label: 'Detalhes e avaliação', alt: 'Tela de Elden Ring no GAMERBOXX, com status do jogo, nota e ações de avaliação e listas.', width: 1855, height: 911 },
@@ -34,7 +34,7 @@ export const projects = [
       { src: gamerboxxProfile, label: 'Perfil e diário', alt: 'Perfil no GAMERBOXX com confirmação de atualização, conexões e diário de jogos.', width: 1855, height: 910 },
       { src: gamerboxxEditProfile, label: 'Edição do perfil', alt: 'Formulário de edição de perfil do GAMERBOXX com nome, bio e imagem.', width: 1855, height: 911 },
     ],
-    role: 'Sou responsável pelo front-end e pela integração com os endpoints. Meu amigo, engenheiro de software sênior, desenvolve o backend e me orienta. Uso o ambiente Docker configurado por ele para desenvolver a integração.',
+    role: 'Sou responsável pelas interfaces e pela integração com os endpoints. Também implementei o endpoint de consulta de jogos por IDs. Meu amigo, engenheiro de software sênior, é o principal responsável pelo backend e me orienta. Uso o ambiente Docker configurado por ele para desenvolver a integração.',
     details: [
       'Criação de conta e login integrados ao backend.',
       'Consulta e edição de perfil com dados persistidos.',
@@ -44,14 +44,14 @@ export const projects = [
     caseStudy: {
       title: 'Buscar os jogos de uma lista sem percorrer o catálogo',
       steps: [
-        { title: 'O problema', text: 'As listas guardavam os IDs dos jogos, mas a interface precisava dos nomes e dos demais dados para exibi-los. Para resolver essa associação, o front-end percorria páginas do catálogo, gerando requisições desnecessárias.' },
-        { title: 'Minha implementação', text: 'Implementei um endpoint que recebe os IDs e devolve os jogos correspondentes. Adaptei o front-end para consultar apenas os jogos presentes na lista, em lotes de até 10 IDs, conforme o contrato da API.' },
+        { title: 'O problema', text: 'As listas guardavam os IDs dos jogos, mas a interface precisava dos nomes e dos demais dados para exibi-los. Para resolver essa associação, a interface percorria páginas do catálogo, gerando requisições desnecessárias.' },
+        { title: 'Minha implementação', text: 'Implementei um endpoint que recebe os IDs e devolve os jogos correspondentes. Adaptei a interface para consultar apenas os jogos presentes na lista, em lotes de até 10 IDs, conforme o contrato da API.' },
         { title: 'O que mudou', text: 'O carregamento da lista passou a depender dos IDs que ela contém. A interface associa os dados retornados a cada jogo e preserva a ordem da lista, sem precisar percorrer o catálogo.' },
       ],
       endpoint: 'POST /v1/games/by-ids',
       flow: ['IDs dos jogos da lista', 'Consulta em lotes de até 10', 'Dados associados a cada jogo'],
     },
-    learning: 'Essa mudança me ajudou a entender como o contrato de uma API afeta a implementação e a quantidade de requisições do front-end.',
+    learning: 'Essa mudança me ajudou a entender como o contrato de uma API afeta a implementação e a quantidade de requisições da interface.',
   },
   {
     id: 'studiocar',
@@ -114,7 +114,7 @@ export const projects = [
     number: '04',
     name: 'Este portfólio',
     subtitle: 'Apresentação dos meus projetos e contribuições.',
-    category: 'Front-end',
+    category: 'Desenvolvimento web',
     type: 'Projeto pessoal',
     description: 'Portfólio em React e Vite, desenvolvido com Codex, com estudos de caso, galeria de telas e temas claro e escuro.',
     tags: ['React', 'CSS', 'Vite'],
@@ -131,7 +131,7 @@ export const projects = [
 ];
 
 export const skills = [
-  { name: 'React', icons: ['react'], description: 'Páginas, componentes e estado no front-end do GAMERBOXX.', project: 'gamerboxx', evidence: 'Ver projeto' },
+  { name: 'React', icons: ['react'], description: 'Páginas, componentes e estado nas interfaces do GAMERBOXX.', project: 'gamerboxx', evidence: 'Ver projeto' },
   { name: 'JavaScript', icons: ['javascript'], description: 'Integração com endpoints e organização dos dados recebidos pela interface.', project: 'gamerboxx', evidence: 'Ver integração' },
   { name: 'HTML e CSS', icons: ['html', 'css'], description: 'Estrutura, estilos e adaptação das interfaces para diferentes telas.', project: 'portfolio', evidence: 'Ver portfólio' },
   { name: 'Git e GitHub', icons: ['git', 'github'], description: 'Versionamento dos projetos e publicação deste portfólio pelo GitHub Actions.', project: 'portfolio', evidence: 'Ver projeto' },

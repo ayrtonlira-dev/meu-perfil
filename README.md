@@ -1,6 +1,6 @@
 # Portfólio · Ayrton Lira
 
-Meu portfólio pessoal, feito em **React + Vite** e publicado no **GitHub Pages** com deploy automático.
+Meu portfólio pessoal, com foco em oportunidades de estágio em desenvolvimento fullstack, feito em **React + Vite** e publicado no **GitHub Pages** com deploy automático.
 
 🔗 **Acesse:** https://ayrtonlira-dev.github.io/meu-perfil/
 
@@ -49,7 +49,7 @@ Para gerar a versão de produção: `npm run build`.
 
 ## Conteúdo dos estudos de caso
 
-- **GAMERBOXX:** produto em desenvolvimento com um amigo responsável pelo backend. Minha atuação no front-end, integração com endpoints e implementação da consulta de jogos por IDs. As capturas mostram o ambiente local.
+- **GAMERBOXX:** produto em desenvolvimento com um amigo responsável pelo backend. Minha atuação nas interfaces, integração com a API e implementação de um endpoint no backend para consulta de jogos por IDs. As capturas mostram o ambiente local.
 - **Studio Car Recife:** oportunidade identificada, conversa com o cliente, definição do conteúdo, domínio e Cloudflare. O layout e o código foram gerados com o Codex.
 - O portfólio também foi desenvolvido com assistência do Codex.
 
