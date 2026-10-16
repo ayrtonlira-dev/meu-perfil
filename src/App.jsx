@@ -32,24 +32,9 @@ function ExternalLink({ href, children, className = '', ...props }) {
 }
 
 function ProjectArt({ project }) {
-  const kind = project.id;
-  return <div className={`project-art art-${kind}`} aria-hidden="true">
-    <div className="art-grid" />
-    {project.images && <div className="screenshot-window">
-      <div className="window-bar"><span><i /><i /><i /></span><small>{project.name}</small><span className="screenshot-count">{project.images.length} telas</span></div>
-      <img src={project.images[0].src} alt="" loading="lazy" width={project.images[0].width || 1898} height={project.images[0].height || 914} />
-    </div>}
-    {kind === 'market' && <div className="market-window">
-      <div className="window-bar"><span><i /><i /><i /></span><small>market.py</small><Icon name="code" size={14} /></div>
-      <div className="market-code"><span className="code-comment"># ideias em movimento</span><br /><span className="code-purple">class</span> <span className="code-yellow">Mercado</span>:<br />&nbsp;&nbsp;<span className="code-purple">def</span> <span className="code-yellow">adicionar</span>(self, produto):<br />&nbsp;&nbsp;&nbsp;&nbsp;self.estoque.append(produto)<br /><br /><span className="code-comment"># simples. organizado. funcional.</span></div>
-      <div className="market-success"><span><Icon name="check" size={15} /> Compra finalizada</span><small>Python + Tkinter</small></div>
-    </div>}
-    {kind === 'portfolio' && <div className="portfolio-window">
-      <div className="mini-nav"><b>al<span>.</span></b><span>sobre &nbsp; projetos &nbsp; contato</span></div>
-      <div className="mini-portfolio"><div><small>OLÁ, EU SOU AYRTON</small><strong>Ideias.<br />Código.<br /><em>Possibilidades.</em></strong><span className="mini-button">Conheça meu trabalho ↗</span></div><div className="mini-photo"><img src={portrait} alt="" loading="lazy" /></div></div>
-      <div className="mini-bottom">REACT <span>✳</span> CSS <span>✳</span> JAVASCRIPT</div>
-    </div>}
-    <span className="art-caption">{project.images ? 'CAPTURA REAL · PÁGINA INICIAL' : `CONCEITO VISUAL · ${kind === 'market' ? 'LÓGICA & SOLUÇÕES' : 'DESIGN & DESENVOLVIMENTO'}`}</span>
+  const cover = project.images[0];
+  return <div className={`project-art art-${project.id}`} aria-hidden="true">
+    <img className="project-cover" src={cover.src} alt="" loading="lazy" width={cover.width} height={cover.height} />
   </div>;
 }
 
@@ -70,7 +55,7 @@ function ProjectGallery({ images, name }) {
 
   return <section className="project-gallery" aria-label={`Galeria de telas do ${name}`} onKeyDown={handleKeyDown}>
     <figure className="gallery-figure">
-      <img src={currentImage.src} alt={currentImage.alt} />
+      <img src={currentImage.src} alt={currentImage.alt} width={currentImage.width} height={currentImage.height} />
       <figcaption aria-live="polite" aria-atomic="true"><span>{currentImage.label}</span><span>{activeImage + 1} / {images.length}</span></figcaption>
     </figure>
     <div className="gallery-thumbnails" role="group" aria-label="Selecionar tela do projeto">
@@ -102,35 +87,48 @@ function ProjectDialog({ project, onClose }) {
       <h2 id="project-title">{project.name}<span>.</span></h2>
       <p className="dialog-subtitle">{project.subtitle}</p>
       <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+      {project.status && <p className="project-status">{project.status}</p>}
+      {project.context && <p className="project-context">{project.context}</p>}
       {project.images && <ProjectGallery images={project.images} name={project.name} />}
       <h3>Minha contribuição</h3><p>{project.role}</p>
+      {project.assistance && <div className="assistance-note"><h3>Uso de IA neste projeto</h3><p>{project.assistance}</p></div>}
       <h3>O que foi construído</h3>
       <ul>{project.details.map(detail => <li key={detail}><Icon name="check" size={17} /><span>{detail}</span></li>)}</ul>
+      {project.caseStudy && <section className="case-study" aria-labelledby="case-study-title">
+        <span className="eyebrow">ESTUDO DE CASO</span>
+        <h3 id="case-study-title">{project.caseStudy.title}</h3>
+        {project.caseStudy.steps.map((step, index) => <div className="case-step" key={step.title}>
+          <span className="case-step-number" aria-hidden="true">0{index + 1}</span>
+          <div><h4>{step.title}</h4><p>{step.text}</p></div>
+        </div>)}
+        {project.caseStudy.endpoint && <div className="endpoint-note">
+          <code>{project.caseStudy.endpoint}</code>
+          <ol className="request-flow">{project.caseStudy.flow.map(step => <li key={step}>{step}</li>)}</ol>
+        </div>}
+      </section>}
       <div className="learning-note"><Icon name="cap" /><div><h3>O que levo desse projeto</h3><p>{project.learning}</p></div></div>
       {project.website
         ? <ExternalLink href={project.website} className="button button-primary">Visitar site <Icon name="diagonal" size={17} /></ExternalLink>
         : project.repository
         ? <ExternalLink href={project.repository} className="button button-primary"><Icon name="github" size={18} /> Explorar repositório <Icon name="diagonal" size={17} /></ExternalLink>
-        : <ExternalLink href={profile.linkedin} className="button button-primary"><Icon name="linkedin" size={18} /> Conversar sobre este projeto <Icon name="diagonal" size={17} /></ExternalLink>}
+        : <p className="development-note">Produto em desenvolvimento. As capturas mostram a aplicação no ambiente local.</p>}
     </div>
   </dialog>;
 }
 
-const navigation = [{ id: 'sobre', label: 'Sobre mim' }, { id: 'projetos', label: 'Projetos' }, { id: 'tecnologias', label: 'Tecnologias' }];
+const navigation = [{ id: 'projetos', label: 'Projetos' }, { id: 'sobre', label: 'Sobre mim' }, { id: 'tecnologias', label: 'Na prática' }];
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
-  const [filter, setFilter] = useState('Todos');
   const [selectedProject, setSelectedProject] = useState(null);
-  const [selectedSkill, setSelectedSkill] = useState(0);
   const [theme, setTheme] = useState(() => {
     try { return localStorage.getItem('ayrton-portfolio-theme') === 'light' ? 'light' : 'dark'; } catch { return 'dark'; }
   });
   const menuButton = useRef(null);
   const projectTrigger = useRef(null);
-  const skill = skills[selectedSkill];
-  const visibleProjects = projects.filter(project => filter === 'Todos' || project.category === filter);
+  const featuredProjects = projects.filter(project => project.featured);
+  const otherProjects = projects.filter(project => !project.featured);
 
   function openProject(project, event) {
     projectTrigger.current = event.currentTarget;
@@ -151,19 +149,13 @@ export default function App() {
     let frame;
     const sections = [...document.querySelectorAll('main > section[id]')];
     const update = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      document.documentElement.style.setProperty('--scroll-progress', `${total > 0 ? window.scrollY / total * 100 : 0}%`);
       const current = sections.filter(section => section.getBoundingClientRect().top <= 160).at(-1);
       setActiveSection(current?.id || 'inicio');
     };
     const onScroll = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
     window.addEventListener('scroll', onScroll, { passive: true });
     update();
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
-    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); observer.disconnect(); };
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
   }, []);
 
   useEffect(() => {
@@ -189,63 +181,86 @@ export default function App() {
           <button ref={menuButton} className="icon-button menu-button" aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
         </div>
       </div>
-      <div className="scroll-progress" />
     </header>
 
     <main id="conteudo">
       <section id="inicio" className="hero container">
         <div className="hero-copy">
-          <p className="hero-intro">Olá, eu sou Ayrton Lira <span className="hello-spark">✳</span></p>
-          <h1>Curiosidade<br />que se transforma<br />em <em>código.</em><span className="heading-star" aria-hidden="true">✳</span></h1>
-          <p className="hero-description">Estudante de Análise e Desenvolvimento de Sistemas na <strong>UNINASSAU</strong>, com foco em <strong>front-end</strong>. Construindo interfaces, aprendendo na prática e dando vida a novas ideias.</p>
-          <div className="hero-actions"><a className="button button-primary" href="#projetos">Conheça meus projetos <Icon name="diagonal" size={18} /></a><ExternalLink href={profile.linkedin} className="button button-secondary"><Icon name="linkedin" size={18} /> LinkedIn</ExternalLink><a href={profile.resume} download className="button button-secondary">Baixar currículo <Icon name="down" size={16} /></a></div>
-          <div className="hero-meta"><span><Icon name="pin" size={15} /> Recife, PE · Brasil</span><span className="meta-divider" /><ExternalLink href={profile.github}><Icon name="github" size={16} /> @ayrtonlira-dev <Icon name="diagonal" size={12} /></ExternalLink></div>
+          <p className="availability">EM BUSCA DE ESTÁGIO EM FRONT-END</p>
+          <p className="hero-intro">Olá, eu sou Ayrton Lira</p>
+          <h1>Conheça um pouco mais sobre mim</h1>
+          <p className="hero-description">Estudo ADS na <strong>UNINASSAU</strong>. No GAMERBOXX, desenvolvo o front-end e integro a API. No Studio Car Recife, identifiquei a falta de um site e conduzi a entrega até a publicação.</p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#projetos">Ver projetos e contribuições <Icon name="down" size={18} /></a>
+            <a href={profile.resume} download className="button button-secondary">Baixar currículo <Icon name="down" size={16} /></a>
+          </div>
+          <div className="hero-meta"><span><Icon name="pin" size={15} /> Recife, PE</span><span className="meta-divider" /><ExternalLink href={profile.github}><Icon name="github" size={16} /> GitHub</ExternalLink><ExternalLink href={profile.linkedin}><Icon name="linkedin" size={16} /> LinkedIn</ExternalLink></div>
         </div>
         <div className="hero-visual">
-          <div className="portrait-orbit" aria-hidden="true" /><span className="portrait-cross" aria-hidden="true">+</span>
-          <div className="portrait-frame"><img src={portrait} alt="Ayrton Lira, estudante e desenvolvedor, sorrindo" fetchPriority="high" /><div className="portrait-shade" /><span className="portrait-top">EM CONSTANTE EVOLUÇÃO <span>↗</span></span><div className="portrait-caption"><span>Desenvolvedor em formação</span><strong>Ayrton Lira</strong></div></div>
-          <div className="code-note"><div className="code-note-icon"><Icon name="code" size={23} /></div><div><span>Um pouco de lógica.</span><strong>Um mundo de possibilidades.</strong></div><span className="note-dot" /></div>
-          <span className="photo-side-label">APRENDER. CONSTRUIR. EVOLUIR.</span>
-        </div>
-        <a href="#sobre" className="scroll-hint"><span>UM POUCO MAIS SOBRE MIM</span><Icon name="down" size={16} /></a>
-      </section>
-
-      <div className="technology-strip" aria-label="Tecnologias: React, JavaScript, HTML, CSS e Git"><div className="container strip-inner"><span className="strip-label">IDEIAS CONSTRUÍDAS COM</span>{skills.map(item => <span className="strip-tech" key={item.name}><Icon name={item.icon} size={20} />{item.name}</span>)}</div></div>
-
-      <section id="sobre" className="section container about-section">
-        <div className="section-heading reveal"><span className="eyebrow"><span>01 /</span> SOBRE MIM</span><h2>Mais do que código.<br /><span>Vontade de construir.</span></h2></div>
-        <div className="about-layout reveal">
-          <div className="about-story"><p>Sou Ayrton, de Recife. Gosto de entender como as coisas funcionam — e de transformar esse aprendizado em algo que outras pessoas possam usar.</p><p>Curso <strong>Análise e Desenvolvimento de Sistemas na UNINASSAU</strong> e concentro meus estudos em <strong>desenvolvimento front-end</strong>. Entre interfaces em React, layouts responsivos e integração com APIs, vou conectando teoria e prática.</p><p>Meu foco é construir <strong>interfaces intuitivas e bem estruturadas</strong>, com atenção à experiência de quem usa. Já aplico esse cuidado em trabalhos freelance, como o site do <strong>Studio Car Recife</strong>, enquanto sigo trocando conhecimento e evoluindo.</p><a className="text-link" href="#contato">Vamos construir algo juntos <Icon name="arrow" size={18} /></a></div>
-          <div className="about-facts"><div className="fact-row"><div className="fact-icon"><Icon name="cap" size={23} /></div><div><small>FORMAÇÃO EM ANDAMENTO</small><h3>Análise e Desenvolvimento<br />de Sistemas</h3><p>UNINASSAU</p></div><span className="fact-index">01</span></div><div className="fact-row"><div className="fact-icon"><Icon name="code" size={23} /></div><div><small>ONDE COLOCO A MÃO NA MASSA</small><h3>Front-end & desenvolvimento web</h3><p>React, interfaces responsivas e integração com APIs</p></div><span className="fact-index">02</span></div><div className="learning-line"><span className="status-dot" /><p>Aprendendo na prática, um projeto de cada vez.</p></div></div>
+          <div className="portrait-frame"><img src={portrait} alt="Ayrton Lira" fetchPriority="high" /></div>
         </div>
       </section>
 
       <section id="projetos" className="projects-section section">
         <div className="container">
-          <div className="section-heading heading-with-aside reveal"><div><span className="eyebrow"><span>02 /</span> PROJETOS SELECIONADOS</span><h2>Aprendizado que<br />ganhou <em>forma.</em></h2></div><p>Cada projeto, um novo desafio.<br />Cada desafio, um passo à frente.</p></div>
-          <div className="projects-toolbar"><div className="project-filters" role="group" aria-label="Filtrar projetos por área">{['Todos', 'Front-end', 'Estudos'].map(item => <button key={item} aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}<span>{item === 'Todos' ? projects.length : projects.filter(project => project.category === item).length.toString().padStart(2, '0')}</span></button>)}</div><ExternalLink href={profile.github} className="text-link">Ver GitHub <Icon name="diagonal" size={16} /></ExternalLink></div>
-          <p className="sr-only" role="status">{visibleProjects.length} projetos exibidos</p>
-          <div className={`projects-grid${visibleProjects.length === 4 ? ' projects-grid-four' : ''}`}>
-            {visibleProjects.map(project => <article className="project-card" key={project.id}>
-              <button className="project-art-button" onClick={event => openProject(project, event)} aria-label={`Conhecer o projeto ${project.name}`}><ProjectArt project={project} /><span className="project-open"><Icon name="diagonal" size={20} /></span></button>
-              <div className="project-info"><div className="project-type"><span>{project.type}</span><span>{project.number}</span></div><h3>{project.name}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><button className="project-detail-link" onClick={event => openProject(project, event)}>Conheça o projeto <Icon name="arrow" size={17} /><span className="sr-only"> {project.name}</span></button>{project.website && <ExternalLink href={project.website} className="project-site-link">Visitar site <Icon name="diagonal" size={17} /><span className="sr-only"> {project.name}</span></ExternalLink>}</div>
+          <div className="section-heading heading-with-aside">
+            <div><span className="eyebrow"><span>01 /</span> PROJETOS EM DESTAQUE</span><h2>O que estou<br />construindo.</h2></div>
+            <p>Contexto, minha participação<br />e decisões de cada projeto.</p>
+          </div>
+          <div className="featured-projects">
+            {featuredProjects.map(project => <article className="project-card featured-project" key={project.id} id={project.id}>
+              <button className="project-art-button" onClick={event => openProject(project, event)} aria-label={`Ver telas do projeto ${project.name}`}><ProjectArt project={project} /><span className="project-open"><Icon name="diagonal" size={20} /></span></button>
+              <div className="project-info">
+                <div className="project-type"><span className="project-status">{project.status}</span><span>{project.number}</span></div>
+                <h3>{project.name}</h3><p>{project.description}</p>
+                <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+                <div className="contribution-summary"><h4>Minha participação</h4><p>{project.contribution}</p></div>
+                <button className="project-detail-link" onClick={event => openProject(project, event)}>Ver estudo de caso <Icon name="arrow" size={17} /><span className="sr-only"> {project.name}</span></button>
+                {project.website && <ExternalLink href={project.website} className="project-site-link">Visitar site <Icon name="diagonal" size={17} /><span className="sr-only"> {project.name}</span></ExternalLink>}
+              </div>
+            </article>)}
+          </div>
+          <div className="other-projects-heading"><h3>Outros projetos e estudos</h3><ExternalLink href={profile.github} className="text-link">Ver GitHub <Icon name="diagonal" size={16} /></ExternalLink></div>
+          <div className="other-projects">
+            {otherProjects.map(project => <article className="study-card" key={project.id} id={project.id}>
+              <span className="eyebrow">{project.type}</span><h3>{project.name}</h3><p>{project.description}</p>
+              <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+              <div className="study-actions"><button className="text-link" onClick={event => openProject(project, event)}>Ver detalhes <span className="sr-only">de {project.name}</span><Icon name="arrow" size={16} /></button><ExternalLink href={project.repository} className="text-link">Código <span className="sr-only">de {project.name}</span><Icon name="diagonal" size={16} /></ExternalLink></div>
             </article>)}
           </div>
         </div>
       </section>
 
+      <section id="sobre" className="section container about-section">
+        <div className="section-heading"><span className="eyebrow"><span>02 /</span> SOBRE MIM</span><h2>De Recife,<br /><span>estudando e desenvolvendo.</span></h2></div>
+        <div className="about-layout">
+          <div className="about-story">
+            <p>Curso <strong>Análise e Desenvolvimento de Sistemas na UNINASSAU</strong> e busco meu primeiro estágio em front-end.</p>
+            <p>No <strong>GAMERBOXX</strong>, trabalho nas páginas e na integração com a API, com orientação de um amigo engenheiro de software sênior. Nosso objetivo é transformar o projeto em um produto.</p>
+            <p>No <strong>Studio Car Recife</strong>, Identifiquei a necessidade, defini o conteúdo com o cliente e conduzi a entrega do site, incluindo domínio, Cloudflare e publicação.</p>
+            <a className="text-link" href="#contato">Entrar em contato <Icon name="arrow" size={18} /></a>
+          </div>
+          <div className="about-facts">
+            <div className="fact-row"><div><small>FORMAÇÃO EM ANDAMENTO</small><h3>Análise e Desenvolvimento<br />de Sistemas</h3><p>UNINASSAU</p></div></div>
+            <div className="fact-row"><div><small>FOCO ATUAL</small><h3>Desenvolvimento de interfaces</h3><p>React, lógica da interface e integração com APIs</p></div></div>
+          </div>
+        </div>
+      </section>
+
       <section id="tecnologias" className="section container skills-section">
-        <div className="section-heading heading-with-aside reveal"><div><span className="eyebrow"><span>03 /</span> MINHA CAIXA DE FERRAMENTAS</span><h2>Tecnologias que<br />fazem <em>acontecer.</em></h2></div><p>O que uso para tirar ideias do papel.<br />Selecione uma tecnologia para explorar.</p></div>
-        <div className="skills-grid reveal" role="group" aria-label="Explorar tecnologias">{skills.map((item, index) => <button key={item.name} className="skill-button" aria-pressed={selectedSkill === index} aria-controls="skill-description" onClick={() => setSelectedSkill(index)} style={{ '--skill-color': item.color }}><Icon name={item.icon} size={34} /><strong>{item.name}</strong><span>{selectedSkill === index ? 'EXPLORANDO' : 'EXPLORAR'} <Icon name="diagonal" size={12} /></span></button>)}</div>
-        <div className="skill-description" id="skill-description" aria-live="polite" aria-atomic="true"><span className="skill-detail-icon"><Icon name={skill.icon} size={25} /></span><div><h3>{skill.label}</h3><p>{skill.description}</p></div><span className="skill-detail-number">{String(selectedSkill + 1).padStart(2, '0')} / {String(skills.length).padStart(2, '0')}</span></div>
-        <div className="currently-learning"><span>NO RADAR <Icon name="diagonal" size={13} /></span><p>Aprofundando React, acessibilidade, interfaces responsivas e integração com APIs.</p></div>
+        <div className="section-heading"><span className="eyebrow"><span>03 /</span> TECNOLOGIAS NA PRÁTICA</span><h2>Onde aplico<br />o que estudo.</h2></div>
+        <div className="applied-skills">
+          {skills.map(item => <article className="applied-skill" key={item.name}>
+            <div className="skill-icons">{item.icons.map(name => <Icon key={name} name={name} size={28} />)}</div><h3>{item.name}</h3><p>{item.description}</p><a className="text-link" href={`#${item.project}`}>{item.evidence}<Icon name="arrow" size={15} /><span className="sr-only">: {item.name}</span></a>
+          </article>)}
+        </div>
       </section>
 
       <section id="contato" className="contact-section section">
-        <div className="container contact-inner reveal"><span className="eyebrow"><span>04 /</span> PRÓXIMO CAPÍTULO</span><h2>Boas ideias começam<br />com uma <em>conversa.</em><span aria-hidden="true">↗</span></h2><p>Estou em busca de <strong>estágio em desenvolvimento front-end</strong>.<br />Tem uma oportunidade ou um projeto em mente? Vamos conversar.</p><div className="contact-actions"><ExternalLink className="button button-primary" href={profile.linkedin}><Icon name="linkedin" size={19} /> Vamos conversar no LinkedIn <Icon name="diagonal" size={18} /></ExternalLink><ExternalLink className="button button-secondary" href={profile.github}><Icon name="github" size={18} /> Explore meu GitHub <Icon name="diagonal" size={17} /></ExternalLink><a className="button button-secondary" href={`mailto:${profile.email}`}>{profile.email}</a><a className="button button-secondary" href={profile.resume} download>Baixar currículo <Icon name="down" size={16} /></a></div><div className="contact-note"><Icon name="pin" size={15} /> De Recife, para novas possibilidades.</div></div>
+        <div className="container contact-inner"><span className="eyebrow"><span>04 /</span> CONTATO</span><h2>Vamos conversar<br />sobre uma oportunidade?</h2><p>Busco <strong>estágio em desenvolvimento front-end</strong>.<br />Posso apresentar as páginas, a lógica e as integrações do GAMERBOXX.</p><div className="contact-actions"><ExternalLink className="button button-primary" href={profile.linkedin}><Icon name="linkedin" size={19} /> LinkedIn <Icon name="diagonal" size={18} /></ExternalLink><a className="button button-secondary" href={`mailto:${profile.email}`}>{profile.email}</a><a className="button button-secondary" href={profile.resume} download>Baixar currículo <Icon name="down" size={16} /></a></div><div className="contact-note"><Icon name="pin" size={15} /> Recife, PE · Brasil</div></div>
       </section>
     </main>
-    <footer className="container site-footer"><a className="brand" href="#inicio" aria-label="Voltar ao início">al<span>.</span></a><p>© {new Date().getFullYear()} Ayrton Lira <span>·</span> Feito com React e curiosidade.</p><a href="#inicio" className="back-top">De volta ao topo <Icon name="arrow" size={16} /></a></footer>
+    <footer className="container site-footer"><a className="brand" href="#inicio" aria-label="Voltar ao início">al<span>.</span></a><p>© {new Date().getFullYear()} Ayrton Lira <span>·</span> React + Vite ·</p><a href="#inicio" className="back-top">De volta ao topo <Icon name="arrow" size={16} /></a></footer>
     {selectedProject && <ProjectDialog project={selectedProject} onClose={() => setSelectedProject(null)} />}
   </>;
 }

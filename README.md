@@ -4,14 +4,13 @@ Meu portfólio pessoal, feito em **React + Vite** e publicado no **GitHub Pages*
 
 🔗 **Acesse:** https://ayrtonlira-dev.github.io/meu-perfil/
 
-![Página inicial do portfólio](https://github.com/user-attachments/assets/59942732-1e82-4f61-bc21-d5ab0e25512d)
-
 ## ✨ Funcionalidades
 
-- **Projetos com filtro** por categoria e detalhes abertos em um `<dialog>` nativo
+- **Projetos em destaque:** GAMERBOXX (em desenvolvimento) e Studio Car Recife (publicado), com contribuição e estudos de caso em um `<dialog>` nativo
+- **Projetos complementares** e tecnologias associadas aos trabalhos em que são aplicadas
 - **Galeria** com miniaturas, navegação por setas do teclado e link para a imagem original
 - **Tema escuro por padrão**, com tema claro salvo no navegador (`localStorage`)
-- **Navegação por âncoras** com seção ativa destacada e barra de progresso de leitura
+- **Navegação por âncoras** com seção ativa destacada
 - **Menu responsivo** para telas pequenas
 - **Acessibilidade:** navegação por teclado, foco gerenciado, textos alternativos nas imagens e respeito a `prefers-reduced-motion`
 - **SEO básico:** título e meta description
@@ -48,12 +47,13 @@ npm run dev
 
 Para gerar a versão de produção: `npm run build`.
 
-## 📸 Telas
+## Conteúdo dos estudos de caso
 
-| Projetos | Detalhe do projeto |
-|---|---|
-| ![Seção de projetos](https://github.com/user-attachments/assets/fed2c150-d329-48b4-b492-c8ee26479132) | ![Detalhe de projeto](https://github.com/user-attachments/assets/29d30176-d494-49f5-893e-59538f5b46d3) |
-| ![Tecnologias](https://github.com/user-attachments/assets/800f3cb5-8825-4582-9f39-2eb53816850f) | ![Contato](https://github.com/user-attachments/assets/ba7bd7d0-56ab-45c3-964b-61f61f271588) |
+- **GAMERBOXX:** produto em desenvolvimento com um amigo responsável pelo backend. Minha atuação no front-end, integração com endpoints e implementação da consulta de jogos por IDs. As capturas mostram o ambiente local.
+- **Studio Car Recife:** oportunidade identificada, conversa com o cliente, definição do conteúdo, domínio e Cloudflare. O layout e o código foram gerados com o Codex.
+- O portfólio também foi desenvolvido com assistência do Codex.
+
+As informações e capturas ficam em `src/data.js` e `assets/`. O currículo público é servido a partir de `public/curriculo-ayrton-lira.pdf`.
 
 ## 📫 Contato
 
