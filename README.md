@@ -1,60 +1,101 @@
-# Portfólio · Ayrton Lira
+# Ayrton Lira · Portfólio
 
-Meu portfólio pessoal, com foco em oportunidades de estágio em desenvolvimento fullstack, feito em **React + Vite** e publicado no **GitHub Pages** com deploy automático.
+Um pouco de Steam, um pouco de Recife e os projetos que venho construindo.
 
-🔗 **Acesse:** https://ayrtonlira-dev.github.io/meu-perfil/
+![Ilustração da estação de trabalho presente no portfólio](src/assets/images/art/room-night.png)
 
-## ✨ Funcionalidades
+## De onde veio a ideia
 
-- **Projetos em destaque:** GAMERBOXX (em desenvolvimento) e Studio Car Recife (publicado), com contribuição e estudos de caso em um `<dialog>` nativo
-- **Projetos complementares** e tecnologias associadas aos trabalhos em que são aplicadas
-- **Galeria** com miniaturas, navegação por setas do teclado e link para a imagem original
-- **Tema escuro por padrão**, com tema claro salvo no navegador (`localStorage`)
-- **Navegação por âncoras** com seção ativa destacada
-- **Menu responsivo** para telas pequenas
-- **Acessibilidade:** navegação por teclado, foco gerenciado, textos alternativos nas imagens e respeito a `prefers-reduced-motion`
-- **SEO básico:** título e meta description
+Jogos fazem parte da minha vida, então fazia sentido trazer isso para o meu portfólio. A referência foi o perfil da Steam: a foto, a vitrine, a biblioteca e aquela sensação de estar visitando um espaço que pertence a alguém.
 
-## 🛠️ Tecnologias
+Quis reinterpretar essa estrutura com a minha identidade. A biblioteca virou uma lista de projetos; cada um abre uma ficha com imagens, tecnologias, contexto e minha participação. As cores, a cidade ao fundo e as interações foram sendo ajustadas até o conjunto fazer sentido para mim.
 
-- React 19
-- Vite
-- CSS puro (sem framework)
-- GitHub Actions + GitHub Pages
+Também queria que quem chegasse procurando um desenvolvedor encontrasse o essencial sem precisar conhecer a referência: o que estou estudando, em quais projetos trabalho e como entrar em contato.
 
-## 📁 Estrutura
+## O que você encontra aqui
 
-```
-src/
-├── App.jsx      # componentes e seções da página
-├── data.js      # projetos, tecnologias e links (edite aqui para atualizar o conteúdo)
-├── main.jsx     # ponto de entrada
-└── styles.css   # estilos e temas
-assets/          # foto e capturas de tela dos projetos
-.github/workflows/deploy.yml  # build e publicação automática a cada push na main
-```
+- **Projetos com contexto:** capturas, estágio de desenvolvimento e divisão de responsabilidades.
+- **Galerias navegáveis:** imagens ampliáveis e navegação por teclado.
+- **Links para cada projeto:** a seleção fica na URL, como `?projeto=myratedgames`, e acompanha o histórico do navegador.
+- **Uma cidade com chuva pixelada:** gotas desenhadas em canvas nas laterais do perfil, com tamanhos e velocidades diferentes.
+- **Controle de movimento:** preferência salva no navegador. A chuva externa respeita movimento reduzido e pausa quando a aba fica oculta.
+- **Layout responsivo:** a organização se adapta ao celular, com navegação textual e acesso direto ao currículo e contato.
 
-Os textos dos projetos ficam separados dos componentes em `data.js`, então adicionar um projeto novo não exige mexer no layout.
+## Os projetos
 
-## ▶️ Rodando localmente
+### myratedgames
+
+Um produto desenvolvido em colaboração, voltado a registrar, avaliar e organizar jogos.
+
+Atuo nas interfaces em React e na integração com a API. Implementei o endpoint que carrega os jogos das listas por IDs. O projeto conta com a colaboração de um engenheiro de software sênior, principal responsável pelo backend e pela orientação técnica.
+
+[Visitar o myratedgames](https://myratedgames.com.br/)
+
+### Studio Car Recife
+
+Identifiquei a necessidade de um site institucional, defini o conteúdo com o cliente e conduzi a entrega, incluindo domínio, Cloudflare e publicação. O site reúne informações sobre os serviços, avaliações do Google, mapa e contato.
+
+O layout e o código foram gerados com o Codex.
+
+[Visitar o Studio Car Recife](https://studiocarrecife.com.br/)
+
+### Este portfólio
+
+Também faz parte da biblioteca. É onde reúno minhas escolhas de direção visual, conteúdo e interação, com implementação assistida por IA e revisão do resultado no navegador.
+
+O projeto passou por várias versões. Algumas decisões vieram justamente de usar a página: reduzir o espaço da ilustração para destacar os projetos, melhorar a leitura, alinhar as colunas e tornar o controle das animações mais visível.
+
+## Como foi desenvolvido
+
+Usei IA durante a exploração de alternativas, implementação e revisão. Minha participação inclui definir a proposta, questionar os resultados, revisar o conteúdo e validar a experiência. A divisão de responsabilidades também aparece nas fichas dos projetos.
+
+A aplicação usa **React, JavaScript, Vite e CSS**. A chuva externa é renderizada com **Canvas 2D**, sem atualizar o estado do React a cada quadro. Os textos e dados ficam versionados no próprio projeto; este portfólio não precisa de backend ou banco de dados para funcionar.
+
+## Rodando localmente
+
+O seletor **PT / EN** no cabeçalho alterna entre português e inglês. A escolha fica salva no navegador e também na URL: `?lang=pt` ou `?lang=en`. Para compartilhar um projeto em inglês, por exemplo, use `?lang=en&projeto=myratedgames`.
+
+Os dois idiomas usam os mesmos componentes e imagens. Os textos originais ficam em `src/content.js`, as traduções em `src/en.json` e a seleção de idioma em `src/LanguageContext.jsx`. As capturas dos projetos e o PDF do currículo mantêm seu idioma original; os links do currículo em inglês indicam que o documento está em português.
+
+Com Node.js e npm instalados:
 
 ```bash
 git clone https://github.com/ayrtonlira-dev/meu-perfil.git
 cd meu-perfil
-npm install
+npm ci
 npm run dev
 ```
 
-Para gerar a versão de produção: `npm run build`.
+Abra o endereço informado pelo Vite no terminal.
 
-## Conteúdo dos estudos de caso
+Para gerar e conferir a versão de produção:
 
-- **GAMERBOXX:** produto em desenvolvimento com um amigo responsável pelo backend. Minha atuação nas interfaces, integração com a API e implementação de um endpoint no backend para consulta de jogos por IDs. As capturas mostram o ambiente local.
-- **Studio Car Recife:** oportunidade identificada, conversa com o cliente, definição do conteúdo, domínio e Cloudflare. O layout e o código foram gerados com o Codex.
-- O portfólio também foi desenvolvido com assistência do Codex.
+```bash
+npm run build
+npm run preview
+```
 
-As informações e capturas ficam em `src/data.js` e `assets/`. O currículo público é servido a partir de `public/curriculo-ayrton-lira.pdf`.
+Os arquivos de produção ficam em `dist/`. O comando de preview serve essa versão localmente; ele não publica o site.
 
-## 📫 Contato
+## Onde cada coisa fica
 
-[LinkedIn](https://www.linkedin.com/in/ayrton-lira-658b873b9/) · ayrtonslira@gmail.com
+```text
+src/
+  content.js     apresentação, projetos, tecnologias e links
+  App.jsx        composição da página e seleção de projetos
+  components/    perfil, biblioteca, galerias e chuva
+  hooks/         diálogos, navegação e preferência de movimento
+  styles/        estilos e adaptações de layout
+  assets/        imagens, fontes e currículo
+public/          favicon e imagem para compartilhamento
+```
+
+Para atualizar os projetos ou os textos do perfil, o ponto de partida é [`src/content.js`](src/content.js).
+
+## Vamos conversar
+
+Sou estudante de Análise e Desenvolvimento de Sistemas na UNINASSAU, em Recife, e busco meu primeiro estágio em desenvolvimento. Hoje trabalho com interfaces e integração de APIs e tenho interesse em evoluir para fullstack.
+
+[LinkedIn](https://www.linkedin.com/in/ayrton-lira-658b873b9/) · [GitHub](https://github.com/ayrtonlira-dev) · [E-mail](mailto:ayrtonslira@gmail.com)
+
+Feedback sobre o código, a navegação ou a apresentação dos projetos é bem-vindo.
